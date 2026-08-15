@@ -76,6 +76,7 @@ body {
 
 .container {
   width: 100%;
+  max-width: 1000px;
   position: relative;
 }
 
@@ -102,7 +103,7 @@ body {
   border-color: var(--card-hover-border);
 }
 
-/* Header & Title Styling */
+/* Header & Responsive Title Styling */
 header {
   text-align: center;
   margin-top: 1.5rem;
@@ -116,11 +117,12 @@ header {
   justify-content: center;
   color: var(--title-color);
   text-align: center;
+  width: 100%;
 }
 
 .font-the {
   font-family: 'Bodoni Moda', 'Bodoni FLF', serif;
-  font-size: 41.25px;
+  font-size: clamp(22px, 5vw, 41.25px);
   font-weight: 400;
   letter-spacing: 0.25em;
   line-height: 1;
@@ -130,16 +132,18 @@ header {
 
 .font-fundamentals {
   font-family: 'Yeseva One', serif;
-  font-size: 57.45px;
+  font-size: clamp(28px, 8.2vw, 57.45px);
   font-weight: 400;
-  letter-spacing: 0.04em;
-  line-height: 1;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
   margin-bottom: 0.15rem;
+  max-width: 100%;
+  word-break: break-word;
 }
 
 .font-rocket-science {
   font-family: 'Maharlika', 'Bodoni Moda', serif;
-  font-size: 41.25px;
+  font-size: clamp(22px, 5vw, 41.25px);
   letter-spacing: 0.02em;
   line-height: 1.1;
 }
@@ -350,7 +354,7 @@ a.source-link:hover {
       <span class="font-fundamentals">FUNDAMENTALS</span>
       <span class="font-rocket-science">of <span class="color-rocket">Rocket</span> <span class="color-science">Science</span></span>
     </div>
-    <p class="subtitle">-By Ayushman Kalita (Author of The Fundamental's of Rocket Science)</p>
+    <p class="subtitle">-By Ayushman Kalita (Author of The Fundamentals of Rocket Science)</p>
   </header>
   <main>
     <div class="card card-ref">
@@ -645,16 +649,14 @@ a.source-link:hover {
     </div>
 
     <a href="images.html" style="text-decoration: none; display: block; width: 100%;">
-  <button class="nav-action-btn">Images In The Book</button>
-</a>
+      <button class="nav-action-btn">Images In The Book</button>
+    </a>
     <a href="about.html" style="text-decoration: none; display: block; width: 100%;">
-  <button class="nav-action-btn">About</button>
-</a>
-
+      <button class="nav-action-btn">About</button>
+    </a>
     <a href="review.html" style="text-decoration: none; display: block; width: 100%;">
-  <button class="nav-action-btn">Reviews</button>
-</a>
-
+      <button class="nav-action-btn">Reviews</button>
+    </a>
   </main>
 </div>
 
