@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About - The Fundamentals of Rocket Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Montserrat:wght@300;400;500;600;700&family=Yeseva+One&display=swap" rel="stylesheet">
+<link href="https://fonts.canfonts.com/css/maharlika" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #f5f5f7;
+  --card-bg: #ffffff;
+  --title-color: #1d1d1f;
+  --text-color: #1d1d1f;
+  --text-secondary: #86868b;
+  --border-color: #e5e7eb;
+  --accent-green: #16a34a;
+  --rocket-color: #4b5563;
+  --science-color: #16a34a;
+  --headline-gradient: linear-gradient(180deg, #1d1d1f 0%, #6e6e73 100%);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --pill-bg: #e8e8ed;
+}
+
+[data-theme="dark"] {
+  --bg-color: #000000;
+  --card-bg: #111113;
+  --title-color: #ffffff;
+  --text-color: #f5f5f7;
+  --text-secondary: #86868b;
+  --border-color: #222224;
+  --accent-green: #22c55e;
+  --rocket-color: #9ca3af;
+  --science-color: #22c55e;
+  --headline-gradient: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --pill-bg: #1c1c1e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  padding: 3rem 16px 6rem 16px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+
+/* Scroll Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Controls Header */
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-green);
+}
+
+.theme-toggle-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent-green);
+}
+
+/* Header Title */
+header {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.book-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--title-color);
+  text-align: center;
+}
+
+.font-the {
+  font-family: 'Bodoni Moda', 'Bodoni FLF', serif;
+  font-size: clamp(28px, 4vw, 41.25px);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  margin-left: 0.25em;
+  margin-bottom: 0.2rem;
+}
+
+.font-fundamentals {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(36px, 5vw, 57.45px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.font-rocket-science {
+  font-family: 'Maharlika', 'Bodoni Moda', serif;
+  font-size: clamp(28px, 4vw, 41.25px);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.color-rocket {
+  color: var(--rocket-color);
+  transition: color 0.3s ease;
+}
+
+.color-science {
+  color: var(--science-color);
+  transition: color 0.3s ease;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-top: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+/* Apple Hero Banner */
+.hero-section {
+  text-align: center;
+  padding: 2rem 1.5rem 3rem 1.5rem;
+}
+
+.hero-headline {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 700;
+  letter-spacing: -0.003em;
+  line-height: 1.0625;
+  background: var(--headline-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+}
+
+.hero-subhead {
+  font-size: clamp(19px, 3vw, 24px);
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin: 0 auto;
+  font-weight: 400;
+}
+
+/* Book Image Showcase */
+.book-showcase {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0 3.75rem 0;
+}
+
+.book-image {
+  max-width: 100%;
+  height: auto;
+  max-height: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 20px 30px var(--shadow-color));
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.book-image:hover {
+  transform: translateY(-6px);
+  filter: drop-shadow(0 28px 40px var(--shadow-color));
+}
+
+/* About Author Section */
+.author-section {
+  text-align: center;
+  padding: 0 1.5rem 4rem 1.5rem;
+}
+
+.author-image-wrapper {
+  margin-top: 2.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.author-image {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  border-radius: 28px;
+  object-fit: cover;
+  box-shadow: 0 20px 40px var(--shadow-color);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.author-image:hover {
+  transform: scale(1.01);
+}
+
+/* --- 5 NEW APPLE-STYLE ELEMENTS --- */
+
+/* 1. Highlight Bento Grid */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 5rem;
+}
+
+.bento-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-green);
+}
+
+.bento-number {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--accent-green);
+  margin-bottom: 0.5rem;
+}
+
+.bento-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.bento-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* 2. Apple Quote Banner */
+.quote-banner {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  margin-bottom: 5rem;
+  box-shadow: 0 15px 35px var(--shadow-color);
+}
+
+.quote-text {
+  font-size: clamp(22px, 3.5vw, 34px);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  max-width: 800px;
+  margin: 0 auto 1.5rem auto;
+}
+
+.quote-author {
+  font-size: 1rem;
+  color: var(--accent-green);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* 3. Topics Cloud Pill List */
+.topics-section {
+  text-align: center;
+  margin-bottom: 5rem;
+}
+
+.topics-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.pill-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.pill {
+  background-color: var(--pill-bg);
+  color: var(--text-color);
+  padding: 10px 20px;
+  border-radius: 980px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.pill:hover {
+  transform: scale(1.04);
+  border-color: var(--accent-green);
+}
+
+/* 4. Book Specification Matrix */
+.specs-section {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 2.5rem;
+  margin-bottom: 5rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.specs-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.specs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem 3rem;
+}
+
+.spec-item {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.8rem;
+}
+
+.spec-label {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.spec-value {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+/* 5. Apple Style Action Banner */
+.action-banner {
+  text-align: center;
+  padding: 3.5rem 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.action-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-primary {
+  background-color: var(--accent-green);
+  color: #ffffff;
+  padding: 14px 32px;
+  border-radius: 980px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: scale(1.02);
+}
+
+.btn-secondary {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 14px 32px;
+  border-radius: 980px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-green);
+  transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specs-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .btn-primary, .btn-secondary {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <nav class="top-nav reveal">
+    <a href="index.html" class="back-link">← Home</a>
+    <button class="theme-toggle-btn" onclick="toggleTheme()">
+      <span id="theme-text">Dark Mode</span>
+    </button>
+  </nav>
+
+  <header class="reveal">
+    <div class="book-title">
+      <span class="font-the">The</span>
+      <span class="font-fundamentals">FUNDAMENTALS</span>
+      <span class="font-rocket-science">of <span class="color-rocket">Rocket</span> <span class="color-science">Science</span></span>
+    </div>
+    <p class="subtitle">-By Ayushman Kalita (Author of The Fundamentals of Rocket Science)</p>
+  </header>
+
+  <section class="hero-section reveal">
+    <h1 class="hero-headline">Designed for <b>Everyone</b></h1>
+    <p class="hero-subhead">Anyone interested in science, aerospace or rocketry can easily grasp and understand the given content, be it a child, an adult, or an aspriting student.</p>
+  </section>
+
+  <div class="book-showcase reveal">
+    <img src="book.png" alt="The Fundamentals of Rocket Science Book Cover" class="book-image">
+  </div>
+
+  <section class="author-section reveal">
+    <h2 class="hero-headline">About the Author</h2>
+    <div class="author-image-wrapper">
+      <img src="author.webp" alt="Author Ayushman Kalita" class="author-image">
+    </div>
+  </section>
+
+  <!-- ELEMENT 1: Bento Grid Highlights -->
+  <section class="bento-grid reveal">
+    <div class="bento-card">
+      <div class="bento-number">100%</div>
+      <div class="bento-title">of The Fundmantals.</div>
+      <div class="bento-desc">Aerospace Engineering concepts explained from the fundamentals, in a way that anyone can grasp and understand.</div>
+    </div>
+    <div class="bento-card">
+      <div class="bento-number">100+</div>
+      <div class="bento-title">Diagrams and Imagery</div>
+      <div class="bento-desc">Several self made diagrams to explain each topic along with NASA approved imagery.</div>
+    </div>
+    <div class="bento-card">
+      <div class="bento-number">0</div>
+      <div class="bento-title">Nonsense</div>
+      <div class="bento-desc">No unnecessary information, straight to the point.</div>
+    </div>
+  </section>
+
+  <!-- ELEMENT 2: Apple Quote Banner -->
+  <section class="quote-banner reveal">
+    <div class="quote-text">"The Author of this book (Me, Ayushman Kalita) is a previous <b><i>Asia Book of Records holder</i> for the youngest author in Asia.</b> I was awarded this around 4 years ago for my work on "Black Holes in a Nutshell". Since then, I've improved significantly, and vastly grown my knowledge, and love, for aerospace engineering, for rocket science. The Book I present to you isn't just a pile of information, its an experience.</div>
+    <div class="quote-author">Ayushman Kalita</div>
+  </section>
+
+  <!-- ELEMENT 3: Topic Cloud Pills -->
+  <section class="topics-section reveal">
+    <h3 class="topics-title">Content</h3>
+    <div class="pill-container">
+      <span class="pill"><i>The Working Principles of a Rocket</i></span> 
+       <span class="pill"><i>Propellant - Liquid Propellants</i></span>
+        <span class="pill"><i>Propellant -  Solid Propellant</i></span>  
+         <span class="pill"><i>Propellant - Hybrid Propellant</i></span>
+          <span class="pill"><i>Rocket Engines - Liquid Propellant Rocket Engines</i></span>  
+          <span class="pill"><i>Rocket Engines - Solid Propellant Rocket Engines</i></span>  
+          <span class="pill"><i>Staged Rockets - Single and Multistage</i></span>  
+          <span class="pill"><i>Multistage Rockets</i></span>  
+          <span class="pill"><i>Steering Your Spacecraft - Following A Trajectory</i></span> 
+          <span class="pill"><i>Thrust Vector Control</i></span>   
+          <span class="pill"><i>Fin Control</i></span>  
+          <span class="pill"><i>The Reaction Control System and Reaction Wheels</i></span> 
+          <span class="pill"><i>Aerodynamics - Soaring Through The Skies</i></span> 
+          <span class="pill"><i>Streamlining and Drag</i></span>   
+          <span class="pill"><i>Lift and Bernouli's Principles</i></span> 
+          <span class="pill"><i>Stability - Nose Cones and Fins</i></span>   
+          <span class="pill"><i>Re-entry, Heat Shields and Parachutes</i></span> 
+          <span class="pill"><i>The Flight Computer and Avionics - The Brains</i></span>    
+         <span class="pill"><i>Orbital Mechanics - Orbiting The Earth and Escaping it</i></span>  
+         <span class="pill"><i>Orbiting The Earth</i></span>  
+         <span class="pill"><i>The Types of Orbits and Their Uses</i></span>  
+         <span class="pill"><i>Reaching Beyond The Earth</i></span>  
+         <span class="pill"><i>NASA and Their Spacecraft - Manufacturing, Mechanisms and Testing</i></span>  
+         <span class="pill"><i>Important NASA Missions</i></span>  
+         <span class="pill"><i>The NASA Docking System</i></span> 
+         <span class="pill"><i>Major NASA Facilities</i></span> 
+         <span class="pill"><i>Testing and Launching</i></span>     
+
+    </div>
+  </section>
+
+  <!-- ELEMENT 4: Specifications Matrix -->
+  <section class="specs-section reveal">
+    <h3 class="specs-title">Book Specifications</h3>
+    <div class="specs-grid">
+      <div class="spec-item">
+        <span class="spec-label">Author</span>
+        <span class="spec-value">Ayushman Kalita</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Subject</span>
+        <span class="spec-value">Aerospace Engineering</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Level</span>
+        <span class="spec-value">Beginner to Advanced</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Language</span>
+        <span class="spec-value">English</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Diagrams</span>
+        <span class="spec-value">Self-Made</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-label">Format</span>
+        <span class="spec-value">Digital & Print</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ELEMENT 5: Action Callout Banner -->
+  <section class="action-banner reveal">
+    <h2 class="action-title">Ready to explore?</h2>
+    <p class="hero-subhead">Dive into the diagram gallery or review the fundamental concepts.</p>
+    <div class="action-buttons">
+      <a href="images.html" class="btn-primary">View Image Gallery</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Dark/Light Theme Switcher
+  function toggleTheme() {
+    const body = document.documentElement;
+    const themeText = document.getElementById('theme-text');
+    if (body.getAttribute('data-theme') === 'dark') {
+      body.removeAttribute('data-theme');
+      themeText.textContent = 'Dark Mode';
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      themeText.textContent = 'Light Mode';
+    }
+  }
+
+  // Apple-style Scroll Reveal Observer
+  document.addEventListener('DOMContentLoaded', () => {
+    const revealElements = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  });
+</script>
+</body>
+</html>

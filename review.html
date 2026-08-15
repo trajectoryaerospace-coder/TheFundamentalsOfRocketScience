@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reviews - The Fundamentals of Rocket Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Montserrat:wght@300;400;500;600;700&family=Yeseva+One&display=swap" rel="stylesheet">
+<link href="https://fonts.canfonts.com/css/maharlika" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #f5f5f7;
+  --card-bg: #ffffff;
+  --title-color: #1d1d1f;
+  --text-color: #1d1d1f;
+  --text-secondary: #86868b;
+  --border-color: #e5e7eb;
+  --accent-green: #16a34a;
+  --rocket-color: #4b5563;
+  --science-color: #16a34a;
+  --headline-gradient: linear-gradient(180deg, #1d1d1f 0%, #6e6e73 100%);
+  --shadow-color: rgba(0, 0, 0, 0.08);
+  --star-color: #f59e0b;
+  --input-bg: #f5f5f7;
+  --pill-bg: #e8e8ed;
+}
+
+[data-theme="dark"] {
+  --bg-color: #000000;
+  --card-bg: #111113;
+  --title-color: #ffffff;
+  --text-color: #f5f5f7;
+  --text-secondary: #86868b;
+  --border-color: #222224;
+  --accent-green: #22c55e;
+  --rocket-color: #9ca3af;
+  --science-color: #22c55e;
+  --headline-gradient: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  --star-color: #fbbf24;
+  --input-bg: #1c1c1e;
+  --pill-bg: #1c1c1e;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.47059;
+  font-weight: 400;
+  letter-spacing: -0.022em;
+  padding: 3rem 16px 6rem 16px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.top-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--accent-green);
+}
+
+.theme-toggle-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--accent-green);
+}
+
+header {
+  text-align: center;
+  margin-top: 1rem;
+  margin-bottom: 4rem;
+}
+
+.book-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--title-color);
+  text-align: center;
+}
+
+.font-the {
+  font-family: 'Bodoni Moda', 'Bodoni FLF', serif;
+  font-size: clamp(28px, 4vw, 41.25px);
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  margin-left: 0.25em;
+  margin-bottom: 0.2rem;
+}
+
+.font-fundamentals {
+  font-family: 'Yeseva One', serif;
+  font-size: clamp(36px, 5vw, 57.45px);
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.font-rocket-science {
+  font-family: 'Maharlika', 'Bodoni Moda', serif;
+  font-size: clamp(28px, 4vw, 41.25px);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.color-rocket {
+  color: var(--rocket-color);
+  transition: color 0.3s ease;
+}
+
+.color-science {
+  color: var(--science-color);
+  transition: color 0.3s ease;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-top: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.form-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  padding: 2.5rem;
+  box-shadow: 0 15px 35px var(--shadow-color);
+  margin-bottom: 4rem;
+}
+
+.form-title {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  background-color: var(--input-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  color: var(--text-color);
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+  outline: none;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: var(--accent-green);
+}
+
+.star-rating-picker {
+  display: flex;
+  gap: 8px;
+  font-size: 2rem;
+  color: var(--border-color);
+  cursor: pointer;
+}
+
+.star-rating-picker .star {
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.star-rating-picker .star:hover,
+.star-rating-picker .star.active {
+  color: var(--star-color);
+  transform: scale(1.1);
+}
+
+.submit-btn {
+  width: 100%;
+  background-color: var(--accent-green);
+  color: #ffffff;
+  border: none;
+  padding: 16px;
+  border-radius: 980px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.01);
+}
+
+/* Percentage Filter Bar */
+.filter-bar-container {
+  margin-bottom: 3rem;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 24px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+}
+
+.filter-bar-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.filter-pill {
+  background-color: var(--pill-bg);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  padding: 10px 18px;
+  border-radius: 980px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.filter-pill:hover, .filter-pill.active {
+  border-color: var(--accent-green);
+  background-color: var(--card-bg);
+  color: var(--accent-green);
+}
+
+.filter-pill .percentage {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.filter-pill.active .percentage {
+  color: var(--accent-green);
+}
+
+/* Reviews Grid */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+}
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+}
+
+.review-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 22px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px var(--shadow-color);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.review-author {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.review-stars {
+  color: var(--star-color);
+  font-size: 1.1rem;
+}
+
+.review-text {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.review-date {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 768px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+<div class="container">
+
+  <nav class="top-nav reveal">
+    <a href="index.html" class="back-link">← Back to Home</a>
+    <button class="theme-toggle-btn" id="themeToggleBtn">
+      <span id="theme-text">Dark Mode</span>
+    </button>
+  </nav>
+
+  <header class="reveal">
+    <div class="book-title">
+      <span class="font-the">The</span>
+      <span class="font-fundamentals">FUNDAMENTALS</span>
+      <span class="font-rocket-science">of <span class="color-rocket">Rocket</span> <span class="color-science">Science</span></span>
+    </div>
+    <p class="subtitle">-By Ayushman Kalita (Author of The Fundamentals of Rocket Science)</p>
+  </header>
+
+  <!-- Add Review Form -->
+  <section class="form-card reveal">
+    <h2 class="form-title">Leave a Review</h2>
+    <form id="reviewForm">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" id="reviewerName" class="form-input" placeholder="e.g. Alex Mercer" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Rating</label>
+        <div class="star-rating-picker" id="starPicker">
+          <span class="star" data-rating="1">★</span>
+          <span class="star" data-rating="2">★</span>
+          <span class="star" data-rating="3">★</span>
+          <span class="star" data-rating="4">★</span>
+          <span class="star" data-rating="5">★</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Review</label>
+        <textarea id="reviewerText" class="form-textarea" rows="4" placeholder="Share your thoughts about the book..." required></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit Review</button>
+    </form>
+  </section>
+
+  <!-- Percentage Rating Bar -->
+  <div class="filter-bar-container reveal">
+    <div class="filter-bar-title">Filter by Rating</div>
+    <div class="filter-pills" id="filterPills">
+      <button class="filter-pill active" data-filter="all">
+        All reviews <span class="percentage" id="pct-all">(100%)</span>
+      </button>
+      <button class="filter-pill" data-filter="5">
+        5 stars <span class="percentage" id="pct-5">(0%)</span>
+      </button>
+      <button class="filter-pill" data-filter="4">
+        4 stars <span class="percentage" id="pct-4">(0%)</span>
+      </button>
+      <button class="filter-pill" data-filter="3">
+        3 stars <span class="percentage" id="pct-3">(0%)</span>
+      </button>
+      <button class="filter-pill" data-filter="2">
+        2 stars <span class="percentage" id="pct-2">(0%)</span>
+      </button>
+      <button class="filter-pill" data-filter="1">
+        1 star <span class="percentage" id="pct-1">(0%)</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Reviews List -->
+  <div class="reviews-grid" id="reviewsContainer">
+    <div class="empty-state">
+      <p>Loading reviews from database...</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- Firebase Realtime Database Module Integration -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
+  import { getDatabase, ref, push, onValue } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDFYJ7wfBT5eIWV1D3oP_2f-pFye9LVQCY",
+    authDomain: "mybookwebsite-d5f52.firebaseapp.com",
+    databaseURL: "https://mybookwebsite-d5f52-default-rtdb.firebaseio.com",
+    projectId: "mybookwebsite-d5f52",
+    storageBucket: "mybookwebsite-d5f52.firebasestorage.app",
+    messagingSenderId: "556270234763",
+    appId: "1:556270234763:web:840878fb4a00ec9678b88e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getDatabase(app);
+  const reviewsRef = ref(db, 'reviews');
+
+  let selectedRating = 5;
+  let activeFilter = 'all';
+  let reviewsData = [];
+
+  // Star Rating Selection Setup
+  function setRating(rating) {
+    selectedRating = rating;
+    const stars = document.querySelectorAll('#starPicker .star');
+    stars.forEach((star) => {
+      const r = parseInt(star.getAttribute('data-rating'));
+      if (r <= rating) {
+        star.classList.add('active');
+      } else {
+        star.classList.remove('active');
+      }
+    });
+  }
+
+  document.querySelectorAll('#starPicker .star').forEach(star => {
+    star.addEventListener('click', () => {
+      const rating = parseInt(star.getAttribute('data-rating'));
+      setRating(rating);
+    });
+  });
+  setRating(5);
+
+  // Update percentages on filter bar
+  function updatePercentages() {
+    const total = reviewsData.length;
+    document.getElementById('pct-all').textContent = '(100%)';
+
+    for (let stars = 1; stars <= 5; stars++) {
+      const count = reviewsData.filter(r => r.rating === stars).length;
+      const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+      document.getElementById(`pct-${stars}`).textContent = `(${pct}%)`;
+    }
+  }
+
+  // Render Reviews List
+  function renderReviews() {
+    const container = document.getElementById('reviewsContainer');
+    updatePercentages();
+
+    let filtered = reviewsData;
+    if (activeFilter !== 'all') {
+      filtered = reviewsData.filter(r => r.rating === parseInt(activeFilter));
+    }
+
+    if (filtered.length === 0) {
+      container.innerHTML = `
+        <div class="empty-state">
+          <p>No reviews added yet in this category. Be the first to share your thoughts!</p>
+        </div>
+      `;
+      return;
+    }
+
+    container.innerHTML = filtered.map(review => {
+      const starString = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+      return `
+        <div class="review-card reveal visible">
+          <div>
+            <div class="review-header">
+              <span class="review-author">${escapeHtml(review.name)}</span>
+              <span class="review-stars">${starString}</span>
+            </div>
+            <p class="review-text">${escapeHtml(review.text)}</p>
+          </div>
+          <span class="review-date">${escapeHtml(review.date || 'Recently')}</span>
+        </div>
+      `;
+    }).join('');
+  }
+
+  function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, function(m) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+  }
+
+  // Realtime Database Sync
+  onValue(reviewsRef, (snapshot) => {
+    const data = snapshot.val();
+    reviewsData = [];
+    if (data) {
+      Object.keys(data).forEach(key => {
+        reviewsData.unshift({
+          id: key,
+          ...data[key]
+        });
+      });
+    }
+    renderReviews();
+  });
+
+  // Submit Review to Realtime Database
+  document.getElementById('reviewForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    const name = document.getElementById('reviewerName').value;
+    const text = document.getElementById('reviewerText').value;
+
+    const newReview = {
+      name: name,
+      rating: selectedRating,
+      text: text,
+      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+      createdAt: Date.now()
+    };
+
+    push(reviewsRef, newReview);
+    document.getElementById('reviewForm').reset();
+    setRating(5);
+  });
+
+  // Filter Pills Event Listeners
+  document.querySelectorAll('.filter-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      activeFilter = pill.getAttribute('data-filter');
+      renderReviews();
+    });
+  });
+
+  // Theme Toggle Functionality
+  document.getElementById('themeToggleBtn').addEventListener('click', () => {
+    const body = document.documentElement;
+    const themeText = document.getElementById('theme-text');
+    if (body.getAttribute('data-theme') === 'dark') {
+      body.removeAttribute('data-theme');
+      themeText.textContent = 'Dark Mode';
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      themeText.textContent = 'Light Mode';
+    }
+  });
+
+  // Scroll Reveal Observer
+  const revealElements = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  revealElements.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

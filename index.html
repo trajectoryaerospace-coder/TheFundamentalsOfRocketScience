@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Fundamentals of Rocket Science</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Montserrat:wght@300;400;500;600&family=Yeseva+One&display=swap" rel="stylesheet">
+<link href="https://fonts.canfonts.com/css/maharlika" rel="stylesheet">
+<style>
+:root {
+  --bg-color: #ffffff;
+  --card-bg: #fefcfc;
+  --card-header-bg: #f7f8fa;
+  --card-inner-bg: #ffffff;
+  --title-color: #0d0d0d;
+  --text-color: #1a1a1a;
+  --subtitle-color: #555555;
+  --border-color: #e5e7eb;
+  --card-hover-border: #16a34a;
+  --shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 20px 35px 10px rgba(0, 0, 0, 0.1);
+  /* Black, Grey, Green Palette */
+  --rocket-color: #4b5563; /* Medium Grey */
+  --science-color: #16a34a; /* Vibrant Green */
+  --accent-green: #16a34a;
+  --badge-bg: #f3f4f6;
+  --badge-text: #1f2937;
+  /* Card Borders */
+  --border-card-1: #16a34a; /* Green */
+  --border-card-2: #6b7280; /* Grey */
+  --border-card-3: #111827; /* Dark Grey / Black */
+}
+
+[data-theme="dark"] {
+  --bg-color: #0b0f17;
+  --card-bg: #111827;
+  --card-header-bg: #1f2937;
+  --card-inner-bg: #0f172a;
+  --title-color: #ffffff;
+  --text-color: #f3f4f6;
+  --subtitle-color: #9ca3af;
+  --border-color: #1f2937;
+  --card-hover-border: #22c55e;
+  --shadow: 0 10px 30px 10px rgba(0, 0, 0, 0.5);
+  --shadow-hover: 0 20px 35px 10px rgba(34, 197, 94, 0.15);
+  /* Dark mode accents */
+  --rocket-color: #9ca3af;
+  --science-color: #22c55e;
+  --accent-green: #22c55e;
+  --badge-bg: #1f2937;
+  --badge-text: #e5e7eb;
+  --border-card-1: #22c55e;
+  --border-card-2: #9ca3af;
+  --border-card-3: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 3rem 13px;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.container {
+  width: 100%;
+  position: relative;
+}
+
+/* Theme Toggle Switch */
+.theme-toggle-btn {
+  position: absolute;
+  top: -10px;
+  right: 0;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 500;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--card-hover-border);
+}
+
+/* Header & Title Styling */
+header {
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 3.5rem;
+}
+
+.book-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--title-color);
+  text-align: center;
+}
+
+.font-the {
+  font-family: 'Bodoni Moda', 'Bodoni FLF', serif;
+  font-size: 41.25px;
+  font-weight: 400;
+  letter-spacing: 0.25em;
+  line-height: 1;
+  margin-left: 0.25em;
+  margin-bottom: 0.2rem;
+}
+
+.font-fundamentals {
+  font-family: 'Yeseva One', serif;
+  font-size: 57.45px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 0.15rem;
+}
+
+.font-rocket-science {
+  font-family: 'Maharlika', 'Bodoni Moda', serif;
+  font-size: 41.25px;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+}
+
+.color-rocket {
+  color: var(--rocket-color);
+}
+
+.color-science {
+  color: var(--science-color);
+}
+
+.subtitle {
+  color: var(--subtitle-color);
+  font-size: 0.92rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  margin-top: 1.5rem;
+}
+
+/* Expandable Card Component */
+.card {
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.card-ref {
+  border-color: var(--border-card-1);
+}
+
+.card-bib {
+  border-color: var(--border-card-2);
+}
+
+.card-idx {
+  border-color: var(--border-card-3);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-hover);
+}
+
+.card-header {
+  padding: 1.88rem 1.8rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+  background-color: var(--card-header-bg);
+}
+
+.card-title h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-color);
+  letter-spacing: 0.02em;
+}
+
+.card-description {
+  font-size: 0.88rem;
+  color: var(--subtitle-color);
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+.toggle-icon {
+  font-size: 1.4rem;
+  font-weight: 300;
+  color: var(--subtitle-color);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+.card-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  background-color: var(--card-inner-bg);
+  padding: 0 1.8rem;
+}
+
+.card-content-inner {
+  padding: 1.88rem 0;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-color);
+  font-size: 0.95rem;
+}
+
+.card.active .toggle-icon {
+  transform: rotate(45deg);
+}
+
+.card.active .card-content {
+  max-height: 5000px;
+  transition: max-height 0.6s cubic-bezier(0.5, 0, 0.5, 1);
+}
+
+ol.ref-list, ul.bib-list {
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+ol.ref-list li, ul.bib-list li {
+  line-height: 1.55;
+}
+
+ul.bib-list {
+  list-style-type: square;
+}
+
+a.source-link {
+  color: var(--accent-green);
+  text-decoration: none;
+  word-break: break-all;
+  font-size: 0.88rem;
+  display: inline-block;
+  margin-top: 0.2rem;
+  font-weight: 500;
+}
+
+a.source-link:hover {
+  text-decoration: underline;
+}
+
+.author-name {
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.work-title {
+  font-style: italic;
+  color: var(--text-color);
+}
+
+.index-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.8rem 1.5rem;
+}
+
+.index-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.4rem 0.6rem;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.index-term {
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.index-pages {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  white-space: nowrap;
+}
+
+/* Bottom Nav Action Buttons */
+.nav-action-btn {
+  width: 100%;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  background-color: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 14px;
+  color: var(--text-color);
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.nav-action-btn:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <button class="theme-toggle-btn" onclick="toggleTheme()">
+    <span id="theme-text">Dark Mode</span>
+  </button>
+  <header>
+    <div class="book-title">
+      <span class="font-the">The</span>
+      <span class="font-fundamentals">FUNDAMENTALS</span>
+      <span class="font-rocket-science">of <span class="color-rocket">Rocket</span> <span class="color-science">Science</span></span>
+    </div>
+    <p class="subtitle">-By Ayushman Kalita (Author of The Fundamental's of Rocket Science)</p>
+  </header>
+  <main>
+    <div class="card card-ref">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title">
+          <h2>References</h2>
+          <p class="card-description">Direct citations, research papers, and technical sources cited throughout the chapters.</p>
+        </div>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <ol class="ref-list">
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (2021). <span class="work-title">Brief history of rockets</span>.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/TRC/Rockets/history_of_rockets.html" target="_blank">https://www.grc.nasa.gov/www/k-12/TRC/Rockets/history_of_rockets.html</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Newton's laws of motion</span>.<br>
+              <a class="source-link" href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/" target="_blank">https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Newton's laws of motion</span>.<br>
+              <a class="source-link" href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/" target="_blank">https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/</a>
+            </li>
+            <li>
+              <span class="author-name">Williams, M.</span> (2016). <span class="work-title">How strong is gravity on other planets?</span> phys.org.<br>
+              <a class="source-link" href="https://phys.org/news/2016-01-strong-gravity-planets.html" target="_blank">https://phys.org/news/2016-01-strong-gravity-planets.html</a>
+            </li>
+            <li>
+              <span class="author-name">Schulman, M.</span> (2025). <span class="work-title">Saturn V Step-by-Step Version 1.5</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.nasa.gov/wp-content/uploads/static/history/afj/pdf/saturn-v-step-by-step.pdf" target="_blank">https://www.nasa.gov/wp-content/uploads/static/history/afj/pdf/saturn-v-step-by-step.pdf</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Sls (space launch system) rs - 25 core stage engine</span>.<br>
+              <a class="source-link" href="https://www.nasa.gov/reference/space-launch-system-rs-25-core-stage-engine/" target="_blank">https://www.nasa.gov/reference/space-launch-system-rs-25-core-stage-engine/</a>
+            </li>
+            <li>
+              <span class="author-name">Smithsonian.</span> (n.d.). <span class="work-title">Rocket engine, liquid fuel, f-1</span>.<br>
+              <a class="source-link" href="https://www.si.edu/object/nasm_A19700271000" target="_blank">https://www.si.edu/object/nasm_A19700271000</a>
+            </li>
+            <li>
+              <span class="author-name">SpaceX.</span> (n.d.). <span class="work-title">Starship</span>.<br>
+              <a class="source-link" href="https://www.spacex.com/vehicles/starship" target="_blank">https://www.spacex.com/vehicles/starship</a>
+            </li>
+            <li>
+              <span class="author-name">SpaceX.</span> (2020). <span class="work-title">Falcon user's guide</span>.<br>
+              <a class="source-link" href="https://spacex.relayto.com/e/spacex-falcon-user-s-guide-oc92qkoxzo1jf" target="_blank">https://spacex.relayto.com/e/spacex-falcon-user-s-guide-oc92qkoxzo1jf</a>
+            </li>
+            <li>
+              <span class="author-name">Benson T.</span> (n.d.). <span class="work-title">General thrust equation</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html" target="_blank">https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html</a>
+            </li>
+            <li>
+              <span class="author-name">Benson T.</span> (n.d.). <span class="work-title">General thrust equation</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html" target="_blank">https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html</a>
+            </li>
+            <li>
+              <span class="author-name">Smithsonian.</span> (n.d.). <span class="work-title">Rocket engine, liquid Fuel, f-1</span>.<br>
+              <a class="source-link" href="https://www.si.edu/object/nasm_A19700271000" target="_blank">https://www.si.edu/object/nasm_A19700271000</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Specific impulse</span>.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/airplane/specimp.html" target="_blank">https://www.grc.nasa.gov/www/k-12/airplane/specimp.html</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Specific impulse</span>.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/airplane/specimp.html" target="_blank">https://www.grc.nasa.gov/www/k-12/airplane/specimp.html</a>
+            </li>
+            <li>
+              <span class="author-name">Url, J.</span> (2021). <span class="work-title">95 Years ago: Goddard's first liquid-fueled rocket</span>.<br>
+              <a class="source-link" href="https://www.nasa.gov/history/95-years-ago-goddards-first-liquid-fueled-rocket/" target="_blank">https://www.nasa.gov/history/95-years-ago-goddards-first-liquid-fueled-rocket/</a>
+            </li>
+            <li>
+              <span class="author-name">T4i.</span> (n.d.). <span class="work-title">Monopropellant Alphard-20</span>.<br>
+              <a class="source-link" href="https://www.t4innovation.com/alphard-20-monopropellant/" target="_blank">https://www.t4innovation.com/alphard-20-monopropellant/</a>
+            </li>
+            <li>
+              <span class="author-name">Flinn Scientific.</span> (2017). <span class="work-title">Magic genie decomposition reactions</span>.<br>
+              <a class="source-link" href="https://www.flinnsci.com/api/library/Download/3bfeef5676dc49c586413f0773b7c964" target="_blank">https://www.flinnsci.com/api/library/Download/3bfeef5676dc49c586413f0773b7c964</a>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-bib">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title">
+          <h2>Bibliography</h2>
+          <p class="card-description">A curated list of foundational reading, historical documents, and extended studies.</p>
+        </div>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <ul class="bib-list">
+            <li>
+              <span class="author-name">Adle, C., & Habib, I., & Baipakov, K.</span> (2003). <span class="work-title">History of civilizations of central Asia, development in contrast: From the sixteenth to the mid-nineteenth century</span>. UNESCO
+            </li>
+            <li>
+              <span class="author-name">Agrawal, P.</span> (2010). <span class="work-title">High energy materials: Propellants, explosives and pyrotechnics</span>. Wiley-VCH.
+            </li>
+            <li>
+              <span class="author-name">Alexander, C., & Grimwood, J., & Swenson, L.</span> (1966). <span class="work-title">This new ocean: A history of project Mercury (PDF)</span>. US: National Aeronautics and Space Administration.
+            </li>
+            <li>
+              <span class="author-name">Andrade T.</span> (2016). <span class="work-title">The gunpowder age: China, military innovation, and the rise of the west in world history</span>. Princeton University
+            </li>
+            <li>
+              <span class="author-name">Davenas, E.</span> (1992). <span class="work-title">Solid rocket propulsion technology</span>. Pergamon.
+            </li>
+            <li>
+              <span class="author-name">Baker D., & Zak A.</span> (2013). <span class="work-title">Race for space 1: Dawn of the space age</span>. Apple Books
+            </li>
+            <li>
+              <span class="author-name">Benson, T.</span> (2021). <span class="work-title">Speed regimes hypersonic re-Entry</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/BGH/hihyper.html" target="_blank">https://www.grc.nasa.gov/www/BGH/hihyper.html</a>
+            </li>
+            <li>
+              <span class="author-name">Benson, T.</span> (2021). <span class="work-title">Vectored thrust</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/WWW/K-12/BGP/vecthrst.html" target="_blank">https://www.grc.nasa.gov/WWW/K-12/BGP/vecthrst.html</a>
+            </li>
+            <li>
+              <span class="author-name">Benson, T.</span> (n.d.). <span class="work-title">Brief history of rockets</span>. National Aeronautics and Space Administration.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/TRC/Rockets/history_of_rockets.html" target="_blank">https://www.grc.nasa.gov/www/k-12/TRC/Rockets/history_of_rockets.html</a>
+            </li>
+            <li>
+              <span class="author-name">Benson, T.</span> (n.d.). <span class="work-title">The general thrust equation</span>. NASA Glenn Research Center.<br>
+              <a class="source-link" href="https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html" target="_blank">https://www.grc.nasa.gov/www/k-12/VirtualAero/BottleRocket/airplane/thrsteq.html</a>
+            </li>
+            <li>
+              <span class="author-name">Bizony, P.</span> (2009). <span class="work-title">How to build your own spaceship</span>. Penguin Group
+            </li>
+            <li>
+              <span class="author-name">Catchpole, J.</span> (2001). <span class="work-title">Project Mercury - NASA's First Manned Space Programme</span>. Chichester, UK: Springer Praxis.
+            </li>
+            <li>
+              <span class="author-name">Chertok, B.</span> (2005). <span class="work-title">Rockets and people volumes</span>. National Aeronautics and Space Administration.
+            </li>
+            <li>
+              <span class="author-name">Ensworth, C.</span> (2013). <span class="work-title">Thrust vector control for nuclear thermal rockets</span>. NASA technical reports server.<br>
+              <a class="source-link" href="https://ntrs.nasa.gov/api/citations/20140002890/downloads/20140002890.pdf" target="_blank">https://ntrs.nasa.gov/api/citations/20140002890/downloads/20140002890.pdf</a>
+            </li>
+            <li>
+              <span class="author-name">Darling, D.</span> (2009). <span class="work-title">Advanced propulsion concepts rocket engine types</span>. The Internet Encyclopedia of Science.<br>
+              <a class="source-link" href="https://web.archive.org/web/20090530080218/http://www.daviddarling.info/encyclopedia/E/electricprop.html" target="_blank">https://web.archive.org/web/20090530080218/http://www.daviddarling.info/encyclopedia/E/electricprop.html</a>
+            </li>
+            <li>
+              <span class="author-name">Einstein, A.</span> (1916). <span class="work-title">Relativity: The special and the general theory</span>.
+            </li>
+            <li>
+              <span class="author-name">Federal Aviation Administration.</span> (2023). <span class="work-title">Pilot's handbook of aeronautical knowledge (PHAK)</span>.<br>
+              <a class="source-link" href="https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/faa-h-8083-25c.pdf" target="_blank">https://www.faa.gov/regulations_policies/handbooks_manuals/aviation/faa-h-8083-25c.pdf</a>
+            </li>
+            <li>
+              <span class="author-name">NASA Technical Reports Server.</span> (2016). <span class="work-title">International docking system standard (IDSS) interface definition document (IDD)</span>.<br>
+              <a class="source-link" href="https://ntrs.nasa.gov/api/citations/20170001546/downloads/20170001546.pdf" target="_blank">https://ntrs.nasa.gov/api/citations/20170001546/downloads/20170001546.pdf</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (1974). <span class="work-title">Turbopump systems liquid rocket engines</span>.<br>
+              <a class="source-link" href="https://ntrs.nasa.gov/api/citations/19750012398/downloads/19750012398.pdf" target="_blank">https://ntrs.nasa.gov/api/citations/19750012398/downloads/19750012398.pdf</a>
+            </li>
+            <li>
+              <span class="author-name">National Aeronautics and Space Administration.</span> (n.d.). <span class="work-title">Wind tunnel</span>.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-idx">
+      <div class="card-header" onclick="toggleCard(this)">
+        <div class="card-title">
+          <h2>Index</h2>
+          <p class="card-description">An alphabetical guide to key aerospace concepts, equations, and terminology.</p>
+        </div>
+        <span class="toggle-icon">+</span>
+      </div>
+      <div class="card-content">
+        <div class="card-content-inner">
+          <div class="index-grid">
+            <div class="index-item"><span class="index-term">A-2 Test Stand</span><span class="index-pages">170, 171</span></div>
+            <div class="index-item"><span class="index-term">Active Docking system</span><span class="index-pages">156, 157</span></div>
+            <div class="index-item"><span class="index-term">Airfoil</span><span class="index-pages">81</span></div>
+            <div class="index-item"><span class="index-term">Angle of Attack</span><span class="index-pages">68</span></div>
+            <div class="index-item"><span class="index-term">Angular Momentum</span><span class="index-pages">74</span></div>
+            <div class="index-item"><span class="index-term">Apollo 1 Incident</span><span class="index-pages">129, 130</span></div>
+            <div class="index-item"><span class="index-term">Apollo 4</span><span class="index-pages">130</span></div>
+            <div class="index-item"><span class="index-term">Apollo 5</span><span class="index-pages">130</span></div>
+            <div class="index-item"><span class="index-term">Apollo 7</span><span class="index-pages">130, 131</span></div>
+            <div class="index-item"><span class="index-term">Apollo 8</span><span class="index-pages">130, 131</span></div>
+            <div class="index-item"><span class="index-term">Apollo 10</span><span class="index-pages">132</span></div>
+            <div class="index-item"><span class="index-term">Apollo 11</span><span class="index-pages">127 – 137</span></div>
+            <div class="index-item"><span class="index-term">APXS</span><span class="index-pages">151</span></div>
+            <div class="index-item"><span class="index-term">Atlantis</span><span class="index-pages">144</span></div>
+            <div class="index-item"><span class="index-term">Atlas Agena</span><span class="index-pages">127, 128, 129</span></div>
+            <div class="index-item"><span class="index-term">Atlas V</span><span class="index-pages">147</span></div>
+            <div class="index-item"><span class="index-term">B-1/B-2 Test stand</span><span class="index-pages">173</span></div>
+            <div class="index-item"><span class="index-term">Barycenter</span><span class="index-pages">114</span></div>
+            <div class="index-item"><span class="index-term">Bipropellant</span><span class="index-pages">14</span></div>
+            <div class="index-item"><span class="index-term">Birth of the Hybrid Motor</span><span class="index-pages">28</span></div>
+            <div class="index-item"><span class="index-term">Booster Separation Motor</span><span class="index-pages">60</span></div>
+            <div class="index-item"><span class="index-term">Center of Pressure</span><span class="index-pages">76</span></div>
+            <div class="index-item"><span class="index-term">Challenger</span><span class="index-pages">142</span></div>
+            <div class="index-item"><span class="index-term">Challenger Disaster</span><span class="index-pages">52</span></div>
+            <div class="index-item"><span class="index-term">ChemCam</span><span class="index-pages">150</span></div>
+            <div class="index-item"><span class="index-term">CHIMRA</span><span class="index-pages">151, 158</span></div>
+            <div class="index-item"><span class="index-term">Columbia</span><span class="index-pages">142</span></div>
+            <div class="index-item"><span class="index-term">Columbia Disaster</span><span class="index-pages">142</span></div>
+            <div class="index-item"><span class="index-term">Command and Service Module</span><span class="index-pages">132 – 137</span></div>
+            <div class="index-item"><span class="index-term">Crawler Transporter</span><span class="index-pages">160, 162</span></div>
+            <div class="index-item"><span class="index-term">Curiosity Robotic Arm</span><span class="index-pages">151 - 153</span></div>
+            <div class="index-item"><span class="index-term">Curiosity Rover Suspension</span><span class="index-pages">154</span></div>
+            <div class="index-item"><span class="index-term">Curiosity Steering</span><span class="index-pages">153</span></div>
+            <div class="index-item"><span class="index-term">Discovery</span><span class="index-pages">143</span></div>
+            <div class="index-item"><span class="index-term">Docking Limits</span><span class="index-pages">158</span></div>
+            <div class="index-item"><span class="index-term">Earthrise</span><span class="index-pages">131</span></div>
+            <div class="index-item"><span class="index-term">EDL</span><span class="index-pages">98, 99</span></div>
+            <div class="index-item"><span class="index-term">Encountering Mars</span><span class="index-pages">120, 121</span></div>
+            <div class="index-item"><span class="index-term">Encountering the moon</span><span class="index-pages">119</span></div>
+            <div class="index-item"><span class="index-term">Enterprise</span><span class="index-pages">142</span></div>
+            <div class="index-item"><span class="index-term">First Cosmonaut to orbit</span><span class="index-pages">119, 120</span></div>
+            <div class="index-item"><span class="index-term">First use of true rockets</span><span class="index-pages">3</span></div>
+            <div class="index-item"><span class="index-term">Flame Deflector</span><span class="index-pages">179, 180</span></div>
+            <div class="index-item"><span class="index-term">G-Force</span><span class="index-pages">4</span></div>
+            <div class="index-item"><span class="index-term">GNC</span><span class="index-pages">93</span></div>
+            <div class="index-item"><span class="index-term">Grain Geometry</span><span class="index-pages">24</span></div>
+            <div class="index-item"><span class="index-term">Hall Effect Engine</span><span class="index-pages">45, 46</span></div>
+            <div class="index-item"><span class="index-term">Haz Cam</span><span class="index-pages">150</span></div>
+            <div class="index-item"><span class="index-term">High Earth Orbit</span><span class="index-pages">108, 109</span></div>
+            <div class="index-item"><span class="index-term">Hot and Cold Staging</span><span class="index-pages">59</span></div>
+            <div class="index-item"><span class="index-term">Hubble Space Telescope</span><span class="index-pages">138, 143, 144</span></div>
+            <div class="index-item"><span class="index-term">Induced drag</span><span class="index-pages">83</span></div>
+            <div class="index-item"><span class="index-term">Ion Engine</span><span class="index-pages">44, 45</span></div>
+            <div class="index-item"><span class="index-term">ISS</span><span class="index-pages">144, 145</span></div>
+            <div class="index-item"><span class="index-term">ISS Harmony module</span><span class="index-pages">155</span></div>
+            <div class="index-item"><span class="index-term">James Webb Space Telescope</span><span class="index-pages">107, 108</span></div>
+            <div class="index-item"><span class="index-term">John F. Kennedy's Speech</span><span class="index-pages">127</span></div>
+            <div class="index-item"><span class="index-term">Kennedy Space Center Clock</span><span class="index-pages">178</span></div>
+            <div class="index-item"><span class="index-term">Kepler's third law</span><span class="index-pages">120</span></div>
+            <div class="index-item"><span class="index-term">Landing on the Moon</span><span class="index-pages">119, 120</span></div>
+            <div class="index-item"><span class="index-term">Launch Pad 39B</span><span class="index-pages">179</span></div>
+            <div class="index-item"><span class="index-term">LCC</span><span class="index-pages">94</span></div>
+            <div class="index-item"><span class="index-term">Lightning Protection System</span><span class="index-pages">183</span></div>
+            <div class="index-item"><span class="index-term">Liquid Engine Turbopump</span><span class="index-pages">35 – 39</span></div>
+            <div class="index-item"><span class="index-term">Liquid Fuels</span><span class="index-pages">17 – 19</span></div>
+            <div class="index-item"><span class="index-term">Low Earth Orbit</span><span class="index-pages">108</span></div>
+            <div class="index-item"><span class="index-term">MAHLI</span><span class="index-pages">150, 151</span></div>
+            <div class="index-item"><span class="index-term">Mars Rover Wheel</span><span class="index-pages">153</span></div>
+            <div class="index-item"><span class="index-term">Mast Cam</span><span class="index-pages">150</span></div>
+            <div class="index-item"><span class="index-term">Mercury Atlas</span><span class="index-pages">126</span></div>
+            <div class="index-item"><span class="index-term">Mixture of Solid Propellant</span><span class="index-pages">21</span></div>
+            <div class="index-item"><span class="index-term">MMRTP</span><span class="index-pages">149</span></div>
+            <div class="index-item"><span class="index-term">MMU</span><span class="index-pages">72</span></div>
+            <div class="index-item"><span class="index-term">Monopropellant</span><span class="index-pages">15</span></div>
+            <div class="index-item"><span class="index-term">MRLV</span><span class="index-pages">125</span></div>
+            <div class="index-item"><span class="index-term">Nav Cam</span><span class="index-pages">150</span></div>
+            <div class="index-item"><span class="index-term">Navigation Display</span><span class="index-pages">97</span></div>
+            <div class="index-item"><span class="index-term">Newton's Laws of Motion</span><span class="index-pages">3</span></div>
+            <div class="index-item"><span class="index-term">Nozzle Cooling</span><span class="index-pages">39, 40</span></div>
+            <div class="index-item"><span class="index-term">Orbit</span><span class="index-pages">107</span></div>
+            <div class="index-item"><span class="index-term">Parasitic Drag</span><span class="index-pages">78</span></div>
+            <div class="index-item"><span class="index-term">Passive Docking System</span><span class="index-pages">156, 157</span></div>
+            <div class="index-item"><span class="index-term">PMC</span><span class="index-pages">96</span></div>
+            <div class="index-item"><span class="index-term">Propulsion</span><span class="index-pages">2, 3, 5 – 11</span></div>
+            <div class="index-item"><span class="index-term">Saturn V</span><span class="index-pages">131 – 134</span></div>
+            <div class="index-item"><span class="index-term">Simple Trajectories</span><span class="index-pages">105</span></div>
+            <div class="index-item"><span class="index-term">Single Stage to Orbit</span><span class="index-pages">56</span></div>
+            <div class="index-item"><span class="index-term">Soft Capture System</span><span class="index-pages">157 – 159</span></div>
+            <div class="index-item"><span class="index-term">Solar Panel Folding</span><span class="index-pages">100</span></div>
+            <div class="index-item"><span class="index-term">Solid Propellant types</span><span class="index-pages">22 – 24</span></div>
+            <div class="index-item"><span class="index-term">Space Shuttle</span><span class="index-pages">138 – 145</span></div>
+            <div class="index-item"><span class="index-term">Sputnik 1</span><span class="index-pages">124</span></div>
+            <div class="index-item"><span class="index-term">Stewart Platform</span><span class="index-pages">66</span></div>
+            <div class="index-item"><span class="index-term">Sub-Orbital Trajectory</span><span class="index-pages">106</span></div>
+            <div class="index-item"><span class="index-term">T97 Test stand</span><span class="index-pages">172</span></div>
+            <div class="index-item"><span class="index-term">Tank Pressure Release</span><span class="index-pages">181</span></div>
+            <div class="index-item"><span class="index-term">The Rocket Equation</span><span class="index-pages">14</span></div>
+            <div class="index-item"><span class="index-term">The Space Race</span><span class="index-pages">124 – 137</span></div>
+            <div class="index-item"><span class="index-term">Thrust</span><span class="index-pages">5, 6-11</span></div>
+            <div class="index-item"><span class="index-term">Titan II GLS</span><span class="index-pages">127, 128</span></div>
+            <div class="index-item"><span class="index-term">Types of Nose Cones</span><span class="index-pages">86, 87</span></div>
+            <div class="index-item"><span class="index-term">V-2 Ballistic Missile</span><span class="index-pages">55, 57</span></div>
+            <div class="index-item"><span class="index-term">VAB</span><span class="index-pages">161, 162</span></div>
+            <div class="index-item"><span class="index-term">Venturi Effect</span><span class="index-pages">82</span></div>
+            <div class="index-item"><span class="index-term">Vernier Thrusters</span><span class="index-pages">42</span></div>
+            <div class="index-item"><span class="index-term">Water Suppression System</span><span class="index-pages">163</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="images.html" style="text-decoration: none; display: block; width: 100%;">
+  <button class="nav-action-btn">Images In The Book</button>
+</a>
+    <a href="about.html" style="text-decoration: none; display: block; width: 100%;">
+  <button class="nav-action-btn">About</button>
+</a>
+
+    <a href="review.html" style="text-decoration: none; display: block; width: 100%;">
+  <button class="nav-action-btn">Reviews</button>
+</a>
+
+  </main>
+</div>
+
+<script>
+  function toggleCard(headerElement) {
+    const card = headerElement.parentElement;
+    document.querySelectorAll('.card').forEach(otherCard => {
+      if (otherCard !== card) {
+        otherCard.classList.remove('active');
+      }
+    });
+    card.classList.toggle('active');
+  }
+
+  function toggleTheme() {
+    const body = document.documentElement;
+    const themeText = document.getElementById('theme-text');
+    if (body.getAttribute('data-theme') === 'dark') {
+      body.removeAttribute('data-theme');
+      themeText.textContent = 'Dark Mode';
+    } else {
+      body.setAttribute('data-theme', 'dark');
+      themeText.textContent = 'Light Mode';
+    }
+  }
+</script>
+</body>
+</html>
